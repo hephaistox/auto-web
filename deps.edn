@@ -1,0 +1,36 @@
+{:aliases {:antq {:deps {com.github.liquidz/antq {:mvn/version "2.11.1276"}
+                         org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
+                  :main-opts ["-m" "antq.core"]}
+           :clj-test-runner {:exec-fn cognitect.test-runner.api/test
+                             :extra-deps {com.cognitect/test-runner
+                                          {:git/url "https://github.com/cognitect-labs/test-runner"
+                                           :sha "3f288f1f16d167723ad87cc35b1dfee3c1681e10"}}}
+           :cljs-deps {:extra-deps {thheller/shadow-cljs {:mvn/version "2.28.22"}}
+                       :extra-paths ["src/cljc" "src/cljs" "test/cljc"]}
+           :codox {:exec-args
+                   {:description "`auto-web` provide web feature to ease Hephaistox web apps"
+                    :doc-paths ["docs/codox"]
+                    :metadata {:doc/format :markdown}
+                    :name "auto-web"
+                    :source-uri
+                    "https://github.com/hephaistox/auto-web/blob/{version}/{filepath}#L{line}"}
+                   :exec-fn codox.main/generate-docs
+                   :extra-deps {codox/codox {:mvn/version "0.10.8"}}}
+           :test-clj {:extra-paths ["test/cljc" "test/clj"]
+                      :main-opts
+                      ["-m" "cognitect.test-runner" "-r" ".*-test.*" "-d" "test/clj" "test/cljc"]}}
+ :deps {amalloy/ring-gzip-middleware {:mvn/version "0.1.4"}
+        com.github.hephaistox/auto-core {:git/sha "d6a8fff0d5179ff70742216bdb101d0ed3506a1c"}
+        com.taoensso/sente {:mvn/version "1.20.0"}
+        hiccup/hiccup {:mvn/version "2.0.0-RC5"}
+        http-kit/http-kit {:mvn/version "2.8.0"}
+        metosin/muuntaja {:mvn/version "0.6.11"}
+        metosin/reitit {:mvn/version "0.8.0"}
+        mount/mount {:mvn/version "0.1.21"}
+        re-frame/re-frame {:mvn/version "1.4.3"}
+        ring-cors/ring-cors {:mvn/version "0.1.13"}
+        ring/ring {:mvn/version "1.14.1"}
+        ring/ring-anti-forgery {:mvn/version "1.4.0"}
+        ring/ring-headers {:mvn/version "0.4.0"}
+        ring/ring-ssl {:mvn/version "0.4.0"}}
+ :paths ["src/clj" "src/cljc" "resources"]}
