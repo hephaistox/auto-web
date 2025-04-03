@@ -32,7 +32,7 @@
         img]
     {:src url
      :target target
-     "linkname" name
+     "data-img-name" name
      :alt alt}))
 
 (defn v-img

@@ -20,6 +20,7 @@
                       :main-opts
                       ["-m" "cognitect.test-runner" "-r" ".*-test.*" "-d" "test/clj" "test/cljc"]}}
  :deps {amalloy/ring-gzip-middleware {:mvn/version "0.1.4"}
+        clj-http/clj-http {:mvn/version "2.3.0"}
         com.github.hephaistox/auto-core {:git/sha "d6a8fff0d5179ff70742216bdb101d0ed3506a1c"}
         com.taoensso/sente {:mvn/version "1.20.0"}
         hiccup/hiccup {:mvn/version "2.0.0-RC5"}

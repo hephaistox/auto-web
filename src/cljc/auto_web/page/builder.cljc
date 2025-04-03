@@ -2,11 +2,13 @@
 
 (defn all-pages-metas
   "For all pages, necessary informations for browsers"
-  [title icon]
+  [title icon l]
   (let [icon (or icon "/favicon.ico")]
     [[:meta {:name "title"
              :property "og:title"
              :content title}]
+     [:meta {:name "lang"
+             :content l}]
      [:meta {:name "twitter:title"
              :content title}]
      [:title title]

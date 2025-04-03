@@ -46,9 +46,9 @@
                       :style {:height "1em"
                               :width "1em"}}])
    (when label
-     [:div.w3-text.w3-tag {:style {:position "absolute"
-                                   :left "0"
-                                   :bottom "2em"}}
+     [:span.w3-text.w3-tag {:style {:position "absolute"
+                                    :left "0"
+                                    :bottom "2em"}}
       label])])
 
 (defn v-small-icons

@@ -30,7 +30,7 @@
   (when (map? link)
     (let [{:keys [url target name download? ping]} link]
       (cond-> {:href url
-               "link-name" name}
+               "data-link-name" name}
         ping (assoc :ping ping)
         target (assoc :target target)
         download? (assoc :download nil)))))
