@@ -1,4 +1,7 @@
-(ns auto-web.page.builder "Tooling to create a web page")
+(ns auto-web.page.builder
+  "Tooling to create a web page"
+  (:require
+   [clojure.string :as str]))
 
 (defn all-pages-metas
   "For all pages, necessary informations for browsers"
@@ -71,3 +74,11 @@
             :crossorigin "anonymous"
             :src url}])
 
+(defn js-lang [l] [:script (str "window.varlang = '" (name l) "';")])
+
+(defn merge-opts
+  [map1 map2]
+  (let [merge-class (str (:class map1) " " (:class map2))]
+    (-> (merge map1 map2)
+        (assoc :class (clojure.string/trim merge-class))
+        (assoc :style (merge (:style map1) (:style map2))))))

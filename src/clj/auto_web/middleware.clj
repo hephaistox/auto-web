@@ -3,8 +3,14 @@
   (:require
    [auto-core.log              :as core-log]
    [auto-web.http-request.lang :refer [default-be-strategy]]
-   [auto-web.lang              :refer [possible-langs]]
-   [ring.util.response         :refer [set-cookie]]))
+   [auto-web.lang              :refer [possible-langs]]))
+
+(defn set-cookie
+  "Sets a cookie on the response. Requires the handler to be wrapped in the
+  wrap-cookies middleware."
+  {:added "1.1"}
+  [resp name value & [opts]]
+  (assoc-in resp [:cookies name] (merge {:value value} opts)))
 
 (defn wrap-exception-handling
   "Handles exceptions that were thrown along the line, handles both sync and async requests.

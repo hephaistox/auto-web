@@ -1,4 +1,4 @@
-{:deps {com.github.hephaistox/auto-build {:git/sha "ab873a34f6757bb46f750f9e415b17f534c219bd"}}
+{:deps {com.github.hephaistox/auto-build {:git/sha "740a55bfdeca371fffda8ae96f7dbab16072052b"}}
  :paths []
  :tasks
  {:requires [[auto-build.os.exit-codes] [auto-build.os.exiting :refer [exit]]]

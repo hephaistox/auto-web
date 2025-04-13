@@ -1,27 +1,29 @@
-{:aliases {:antq {:deps {com.github.liquidz/antq {:mvn/version "2.11.1276"}
-                         org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
-                  :main-opts ["-m" "antq.core"]}
-           :clj-test-runner {:exec-fn cognitect.test-runner.api/test
-                             :extra-deps {com.cognitect/test-runner
-                                          {:git/url "https://github.com/cognitect-labs/test-runner"
-                                           :sha "3f288f1f16d167723ad87cc35b1dfee3c1681e10"}}}
-           :cljs-deps {:extra-deps {thheller/shadow-cljs {:mvn/version "2.28.22"}}
-                       :extra-paths ["src/cljc" "src/cljs" "test/cljc"]}
-           :codox {:exec-args
-                   {:description "`auto-web` provide web feature to ease Hephaistox web apps"
-                    :doc-paths ["docs/codox"]
-                    :metadata {:doc/format :markdown}
-                    :name "auto-web"
-                    :source-uri
-                    "https://github.com/hephaistox/auto-web/blob/{version}/{filepath}#L{line}"}
-                   :exec-fn codox.main/generate-docs
-                   :extra-deps {codox/codox {:mvn/version "0.10.8"}}}
-           :test-clj {:extra-paths ["test/cljc" "test/clj"]
-                      :main-opts
-                      ["-m" "cognitect.test-runner" "-r" ".*-test.*" "-d" "test/clj" "test/cljc"]}}
+{:aliases
+ {:antq {:deps {com.github.liquidz/antq {:mvn/version "2.11.1276"}
+                org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
+         :main-opts ["-m" "antq.core"]}
+  :clj-test-runner {:exec-fn cognitect.test-runner.api/test
+                    :extra-deps {com.cognitect/test-runner
+                                 {:git/url "https://github.com/cognitect-labs/test-runner"
+                                  :sha "3f288f1f16d167723ad87cc35b1dfee3c1681e10"}}}
+  :cljs-deps {:extra-deps {devcards/devcards {:mvn/version "0.2.7"}
+                           thheller/shadow-cljs {:mvn/version "2.28.23"}}
+              :extra-paths
+              ["src/cljc" "src/cljs" "test/cljc" "env/devcards/src/cljs" "env/devcards/resources"]}
+  :codox {:exec-args {:description "`auto-web` provide web feature to ease Hephaistox web apps"
+                      :doc-paths ["docs/codox"]
+                      :metadata {:doc/format :markdown}
+                      :name "auto-web"
+                      :source-uri
+                      "https://github.com/hephaistox/auto-web/blob/{version}/{filepath}#L{line}"}
+          :exec-fn codox.main/generate-docs
+          :extra-deps {codox/codox {:mvn/version "0.10.8"}}}
+  :test-clj {:extra-paths ["test/cljc" "test/clj"]
+             :main-opts
+             ["-m" "cognitect.test-runner" "-r" ".*-test.*" "-d" "test/clj" "test/cljc"]}}
  :deps {amalloy/ring-gzip-middleware {:mvn/version "0.1.4"}
-        clj-http/clj-http {:mvn/version "2.3.0"}
-        com.github.hephaistox/auto-core {:git/sha "d6a8fff0d5179ff70742216bdb101d0ed3506a1c"}
+        clj-http/clj-http {:mvn/version "3.13.0"}
+        com.github.hephaistox/auto-core {:git/sha "70c0de7cfc2898a76ed607814f58b45cb98c7936"}
         com.taoensso/sente {:mvn/version "1.20.0"}
         hiccup/hiccup {:mvn/version "2.0.0-RC5"}
         http-kit/http-kit {:mvn/version "2.8.0"}
