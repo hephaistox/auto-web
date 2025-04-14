@@ -18,7 +18,7 @@
 (def images
   (->> [{:url "/images/logos/hephaistox_logo.png"
          :alt "Hephaistox logo"
-         :img-id :hephaistox-log
+         :img-id :hephaistox-logo
          :label "Hephaistox"}
         {:url "/images/logos/javascript.png"
          :alt "Javascript logo"
@@ -111,4 +111,4 @@
   [opts img]
   (if (nil? img) (cicon-img* {} opts) (cicon-img* opts img)))
 
-(defn cicon "A font awesome icon" [opts fa] [:i.fa (assoc opts :class fa)])
+(defn cicon "A font awesome icon" [opts fa] [:i.fa (merge-opts opts {:class fa})])

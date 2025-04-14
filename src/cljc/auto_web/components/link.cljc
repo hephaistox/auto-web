@@ -48,3 +48,9 @@
                                    :left "0"
                                    :bottom "1.5em"}}
       "Download"])])
+
+(defn cspan-link
+  "An hiccup `:a` tag to the [[auto-web.components.link]].
+  `content` is what is wrapped by the `:a` tag."
+  [opts link & content]
+  [:a (merge-opts (link-opts link) (assoc-in opts [:style :text-decoration] "underline")) content])
