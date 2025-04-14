@@ -56,6 +56,15 @@
           :rel "stylesheet"
           :href url}])
 
+(defn print-css-meta
+  "Add a css stylesheet used for printing"
+  [{:keys [url]
+    :as _link}]
+  [:link {:type "text/css"
+          :rel "stylesheet"
+          :media "print"
+          :href url}])
+
 (defn css-meta-preloaded
   "Add a css stylesheet"
   [{:keys [url]
