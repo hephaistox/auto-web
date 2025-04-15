@@ -10,7 +10,7 @@
   * Then, the language stored in the js.
   * In worst case, the `:en` language"
   []
-  (let [ls-lang (wlocal-storage/get-item :lang)
+  (let [ls-lang (wlocal-storage/get-ls :lang)
         server-accepted-lang js/lang]
     (cond
       (some? ls-lang) (keyword ls-lang)
