@@ -7,6 +7,13 @@
    [auto-web.lang      :refer [accepted-lang into-languages]]
    [clojure.string     :as str]))
 
+(defn update-cookie-language
+  "Update the cookie and update the page so it takes effect.
+
+  The cookie is changed in the current document and the page is updated."
+  [lang]
+  (str "document.cookie = \"lang=" lang "; path=/\";location.reload();"))
+
 (defn accept-lang-str
   "The accepted language's string in a request: e.g: `\"en-US,en;q=0.9\"`"
   [http-request]

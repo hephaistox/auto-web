@@ -16,3 +16,8 @@
       (some? ls-lang) (keyword ls-lang)
       server-accepted-lang (keyword server-accepted-lang)
       :else :en)))
+
+(defn clang
+  []
+  (-> (or js/varlang "fr")
+      keyword))

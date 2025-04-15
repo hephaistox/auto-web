@@ -1,12 +1,17 @@
-(ns auto-web.page.builder "Tooling to create a web page")
+(ns auto-web.page.builder
+  "Tooling to create a web page"
+  (:require
+   [clojure.string :as str]))
 
 (defn all-pages-metas
   "For all pages, necessary informations for browsers"
-  [title icon]
+  [title icon l]
   (let [icon (or icon "/favicon.ico")]
     [[:meta {:name "title"
              :property "og:title"
              :content title}]
+     [:meta {:name "lang"
+             :content l}]
      [:meta {:name "twitter:title"
              :content title}]
      [:title title]
@@ -51,6 +56,15 @@
           :rel "stylesheet"
           :href url}])
 
+(defn print-css-meta
+  "Add a css stylesheet used for printing"
+  [{:keys [url]
+    :as _link}]
+  [:link {:type "text/css"
+          :rel "stylesheet"
+          :media "print"
+          :href url}])
+
 (defn css-meta-preloaded
   "Add a css stylesheet"
   [{:keys [url]
@@ -69,3 +83,11 @@
             :crossorigin "anonymous"
             :src url}])
 
+(defn js-lang [l] [:script (str "window.varlang = '" (name l) "';")])
+
+(defn merge-opts
+  [map1 map2]
+  (let [merge-class (str (:class map1) " " (:class map2))]
+    (-> (merge map1 map2)
+        (assoc :class (clojure.string/trim merge-class))
+        (assoc :style (merge (:style map1) (:style map2))))))
