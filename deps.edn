@@ -7,7 +7,7 @@
                                  {:git/url "https://github.com/cognitect-labs/test-runner"
                                   :sha "3f288f1f16d167723ad87cc35b1dfee3c1681e10"}}}
   :cljs-deps {:extra-deps {devcards/devcards {:mvn/version "0.2.7"}
-                           thheller/shadow-cljs {:mvn/version "2.28.23"}}
+                           thheller/shadow-cljs {:mvn/version "3.2.0"}}
               :extra-paths
               ["src/cljc" "src/cljs" "test/cljc" "env/devcards/src/cljs" "env/devcards/resources"]}
   :codox {:exec-args {:description "`auto-web` provide web feature to ease Hephaistox web apps"
@@ -22,17 +22,17 @@
              :main-opts
              ["-m" "cognitect.test-runner" "-r" ".*-test.*" "-d" "test/clj" "test/cljc"]}}
  :deps {amalloy/ring-gzip-middleware {:mvn/version "0.1.4"}
-        clj-http/clj-http {:mvn/version "3.13.0"}
-        com.github.hephaistox/auto-core {:git/sha "a47200a06004ce5fcb25ca1be66a15ee5dc7aec5"}
+        clj-http/clj-http {:mvn/version "3.13.1"}
+        com.github.hephaistox/auto-core {:git/sha "e72b9a127cd0d7a2665be1db69673babed722ee5"}
         com.taoensso/sente {:mvn/version "1.20.0"}
-        hiccup/hiccup {:mvn/version "2.0.0-RC5"}
-        http-kit/http-kit {:mvn/version "2.8.0"}
+        hiccup/hiccup {:mvn/version "2.0.0"}
+        http-kit/http-kit {:mvn/version "2.8.1"}
         metosin/muuntaja {:mvn/version "0.6.11"}
-        metosin/reitit {:mvn/version "0.8.0"}
-        mount/mount {:mvn/version "0.1.21"}
+        metosin/reitit {:mvn/version "0.9.1"}
+        mount/mount {:mvn/version "0.1.23"}
         re-frame/re-frame {:mvn/version "1.4.3"}
         ring-cors/ring-cors {:mvn/version "0.1.13"}
-        ring/ring {:mvn/version "1.14.1"}
+        ring/ring {:mvn/version "1.15.2"}
         ring/ring-anti-forgery {:mvn/version "1.4.0"}
         ring/ring-headers {:mvn/version "0.4.0"}
         ring/ring-ssl {:mvn/version "0.4.0"}}
