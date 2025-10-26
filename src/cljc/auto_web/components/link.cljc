@@ -38,16 +38,21 @@
   "An hiccup `:a` tag to the [[auto-web.components.link]].
   `content` is what is wrapped by the `:a` tag."
   [opts link & content]
-  [:div.w3-tooltip
-   (vec (concat (cond
-                  link [:a (merge-opts (link-opts link) opts)]
-                  opts [:span opts])
-                content))
-   (when (:download? link)
-     [:div.w3-tag.w3-text {:style {:position "absolute"
-                                   :left "0"
-                                   :bottom "1.5em"}}
-      "Download"])])
+  (if (:download? link)
+    [:div {:class "w3-tooltip"}
+     (vec (concat (cond
+                    link [:a (merge-opts (link-opts link) opts)]
+                    opts [:span opts])
+                  content))
+     (when (:download? link)
+       [:div.w3-tag.w3-text {:style {:position "absolute"
+                                     :left "0"
+                                     :bottom "1.5em"}}
+        "Download"])]
+    (vec (concat (cond
+                   link [:a (merge-opts (link-opts link) opts)]
+                   opts [:span opts])
+                 content))))
 
 (defn cspan-link
   "An hiccup `:a` tag to the [[auto-web.components.link]].
