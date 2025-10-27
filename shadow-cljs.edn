@@ -1,8 +1,12 @@
 {:builds
- {:browser-test {:ns-regexp "-test$"
-                 :runner-ns shadow.test.browser
-                 :target :browser-test
-                 :test-dir "target/browser-test"}
+ {:cljs-browser-test {:ns-regexp "-test$"
+                      :runner-ns shadow.test.browser
+                      :target :browser-test
+                      :test-dir "target/browser-test"}
+  :cljs-node-test {:autorun true
+                   :ns-regexp "-test$"
+                   :output-to "target/cljs-node-test.js"
+                   :target :node-test}
   :devcards {:target :browser-test
              :ns-regexp "-cards$"
              :test-dir "target/devcards"
@@ -14,11 +18,7 @@
              :js-options {:resolve {"devcards-marked" {:require "marked"
                                                        :target :npm}
                                     "devcards-syntax-highlighter" {:require "highlight.js"
-                                                                   :target :npm}}}}
-  :ltest {:autorun true
-          :ns-regexp "-test$"
-          :output-to "target/ltest.js"
-          :target :node-test}}
+                                                                   :target :npm}}}}}
  :deps {:aliases [:cljs-deps]}
  :dev-http {3001 ["target/devcards" "resources/public" "env/devcards/resources"]
             9606 ["target/browser-test"]}

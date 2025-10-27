@@ -29,21 +29,22 @@
    :requires [[auto-build.tasks.clj-test :as build-clj-test]
               [auto-build.echo :refer [level1-header]]]
    :task (->
-           (build-clj-test/clj-test level1-header "." "clj-test-runner" (current-task) ["test-clj"])
+           (build-clj-test/clj-test level1-header "." "clj-test-runner" (current-task) ["clj-test"])
            exit)}
   cljs-browser-test
   {:doc "Test with cljs in browser"
    :requires [[auto-build.tasks.cljs-browser-test :as build-cljs-browser]
               [auto-build.echo :refer [level1-header]]]
-   :task (->
-           (build-cljs-browser/cljs-browser-test level1-header "." (current-task) ["browser-test"])
-           exit)}
+   :task
+   (-> (build-cljs-browser/cljs-browser-test level1-header "." (current-task) ["cljs-browser-test"])
+       exit)}
   cljs-node-test
   {:doc "Test with cljs"
    :requires [[auto-build.tasks.cljs-node-test :as build-cljs-node-test]
               [auto-build.echo :refer [level1-header]]]
-   :task (-> (build-cljs-node-test/cljs-node-test level1-header "." (current-task) ["ltest"])
-             exit)}
+   :task (->
+           (build-cljs-node-test/cljs-node-test level1-header "." (current-task) ["cljs-node-test"])
+           exit)}
   copy {:doc "Copy files from source projects (as defined in ext_src.edn)"
         :requires [[auto-build.tasks.copy :as tc] [auto-build.echo :refer [level1-header]]]
         :task (tc/run level1-header "ext_src.edn")}
@@ -64,7 +65,7 @@
           :task (-> (task-format/format level1-header "." (current-task))
                     exit)}
   gha {:doc "To be run by github action"
-       :task (do (shell "bb clj-test test-clj -v") (shell "bb cljs-node-test all -v"))}
+       :task (do (shell "bb clj-test -v") (shell "bb cljs-node-test all -v"))}
   heph-info {:doc "Hephaistox project info"
              :extra-paths []
              :requires [[auto-build.tasks.heph-info :as heph-info]
@@ -76,14 +77,14 @@
         :task (-> (task-lint/lint level1-header
                                   ["auto_web_clj/src"
                                    "auto_web_cljs/src"
-                                   "auto_web_core/src"
+                                   "auto_web_cljc/src"
                                    "auto_web_clj/test"
-                                   "auto_web_core/test"]
+                                   "auto_web_cljc/test"]
                                   "."
                                   (current-task))
                   exit)}
   repl {:doc "Clojure repl based on cider"
         :override-builtin true
         :requires [[auto-build.tasks.repl :as build-repl] [auto-build.echo :refer [level1-header]]]
-        :task (-> (build-repl/repl level1-header "." (current-task) [:test-clj] 7006)
+        :task (-> (build-repl/repl level1-header "." (current-task) [:clj-test] 7006)
                   exit)}}}
