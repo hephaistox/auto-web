@@ -6,13 +6,13 @@
 
 (defn- on-close-modal
   [modal-kw]
-  #?(:cljs (fn [_] (set! (.-style.display (.getElementById js/document (name modal-kw))) "none"))
-     :clj (str "document.getElementById(\"" (name modal-kw) "\").style.display = \"none\";")))
+  #?(:cljs (fn [_] (set! (.-style.display (.getElementById js/document modal-kw)) "none"))
+     :clj (str "document.getElementById(\"" modal-kw "\").style.display = \"none\";")))
 
 (defn- on-open-modal
   [modal-kw]
-  #?(:cljs (fn [_] (set! (.-style.display (.getElementById js/document (name modal-kw))) "block"))
-     :clj (str "document.getElementById(\"" (name modal-kw) "\").style.display = \"block\";")))
+  #?(:cljs (fn [_] (set! (.-style.display (.getElementById js/document modal-kw)) "block"))
+     :clj (str "document.getElementById(\"" modal-kw "\").style.display = \"block\";")))
 
 (defn cpeople-modal*
   "What is displayed when the modal opens"
@@ -40,10 +40,10 @@
   [:div.w3-round-xxlarge.w3-col.m4.w3-card
    opts
    [:div.w3-modal {:id modal-kw
-                   :onclick (on-close-modal modal-kw)}
+                   :on-click (on-close-modal modal-kw)}
     [:div.w3-modal-content.w3-animate-top.w3-round-xxlarge {:style {:z-index "-9999!important"}}
      modal-content]]
-   [:div.w3-padding-24.w3-row {:onclick (on-open-modal modal-kw)}
+   [:div.w3-padding-24.w3-row {:on-click (on-open-modal modal-kw)}
     [:div.w3-center.w3-row (cimg {:class "w3-circle w3-center w3-margin"} :xsmall img)]
     [:div.w3-row.w3-center
      [:div.w3-large.w3-bold people-name]

@@ -51,7 +51,9 @@
   "Metadata of an img html element."
   [img]
   (let [{:keys [url target alt img-id]
-         :or {url "images/logos/not_def.png"}}
+         :or {url (-> images
+                      :not-def
+                      :url)}}
         img]
     {:src url
      :target target

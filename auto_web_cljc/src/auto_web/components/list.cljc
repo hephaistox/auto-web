@@ -12,7 +12,7 @@
   (:require
    [auto-core.uuid           :refer [unguessable]]
    [auto-web.components.img  :refer [cicon cicon-img]]
-   [auto-web.components.link :refer [clink]]
+   [auto-web.components.link :refer [link-opts]]
    [clojure.string           :refer [blank?]]))
 
 (defn cbullet
@@ -30,8 +30,8 @@
                      [:i.fa {:class (str fa-icon " w3-center")
                              :style {:width "1em"}}]
                      (if-not (blank? label)
-                       [:b.w3-margin-right.w3-button.w3-hover-opacity
-                        (clink {} link (str label ":"))]
+                       [:b.w3-margin.w3-button.w3-hover-opacity
+                        [:a (link-opts link) (str label ":")]]
                        [:b.w3-margin-right])
                      (when tooltip
                        [:span.w3-text.w3-tag {:style {:position "absolute"
@@ -52,15 +52,15 @@
         item*]
     [:div.w3-tooltip
      (assoc-in opts* [:style :overflow] "visible")
-     (clink {}
-            link
-            [:i.fa.w3-btn.w3-center {:class fa-icon
-                                     :style {:overflow "visible"}}]
-            (when tooltip
-              [:span.w3-text.w3-tag {:style {:position "absolute"
-                                             :left "0"
-                                             :bottom "2.5em"}}
-               tooltip]))]))
+     [:a
+      (link-opts link)
+      [:i.fa.w3-btn.w3-center {:class fa-icon
+                               :style {:overflow "visible"}}]]
+     (when tooltip
+       [:span.w3-text.w3-tag {:style {:position "absolute"
+                                      :left "0"
+                                      :bottom "2.5em"}}
+        tooltip])]))
 
 (defn cbar
   "Display as a bar of icons"
@@ -86,14 +86,12 @@
   ^{:key react-key}
   [:div.w3-tooltip
    (assoc-in opts [:style :overflow] "visible")
-   (clink {}
-          link
-          [:i.fa.w3-btn.w3-center (cicon-img {} img)]
-          (when tooltip
-            [:span.w3-text.w3-tag {:style {:position "absolute"
-                                           :left "0"
-                                           :bottom "2em"}}
-             tooltip]))])
+   [:a (link-opts link) [:i.fa.w3-btn.w3-center (cicon-img {} img)]]
+   (when tooltip
+     [:span.w3-text.w3-tag {:style {:position "absolute"
+                                    :left "0"
+                                    :bottom "2em"}}
+      tooltip])])
 
 (defn csmall-imgs
   "List `items` to display as small buttons all on the same row."
@@ -104,15 +102,15 @@
               (let [{:keys [fa-icon link label]} item]
                 (conj hiccup
                       (when (seq item)
-                        (clink {}
-                               link
-                               [:div.w3-tooltip.w3-button {:style {:overflow "visible"}}
-                                [:div.w3-hover-opacity (cicon {} fa-icon)]
-                                (when label
-                                  [:div.w3-text.w3-tag {:style {:bottom "-2em"
-                                                                :left "0em"
-                                                                :position "absolute"}}
-                                   label])])))))
+                        [:a
+                         (link-opts link)
+                         [:div.w3-tooltip.w3-button {:style {:overflow "visible"}}
+                          [:div.w3-hover-opacity (cicon {} fa-icon)]
+                          (when label
+                            [:div.w3-text.w3-tag {:style {:bottom "-2em"
+                                                          :left "0em"
+                                                          :position "absolute"}}
+                             label])]]))))
             [:div.w3-container.w3-content.w3-flex
              (assoc-in opts [:style :justify-content] "center")]
             items)))

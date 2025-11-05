@@ -12,7 +12,11 @@
                     :extra-paths ["auto_web_cljc/test" "auto_web_clj/test"]}
   :cljs-deps {:extra-deps {com.github.hephaistox/auto-web-cljc {:local/root "auto_web_cljc"}
                            com.github.hephaistox/auto-web-cljs {:local/root "auto_web_cljs"}}
-              :extra-paths ["auto_web_cljc/test" "auto_web_clj/test"]}
+              :extra-paths ["auto_web_cljc/test"
+                            "auto_web_clj/test"
+                            "auto_web_clj/resources"
+                            "auto_web_cljs/env/portfolio/src"
+                            "auto_web_cljs/env/portfolio/resources"]}
   :codox {:exec-args {:description "`auto-web` provide web feature to ease Hephaistox web apps"
                       :doc-paths ["docs/codox"]
                       :metadata {:doc/format :markdown}

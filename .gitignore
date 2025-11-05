@@ -11,6 +11,7 @@
 **/.clever.json
 **/tmp
 **/target
+**/public/js
 
 ### Intellij
 .idea/

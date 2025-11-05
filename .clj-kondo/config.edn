@@ -1,2 +1,4 @@
-{:lint-as {devcards.core/defcard clojure.core/def
-           devcards.core/defcard-rg clojure.core/def}}
+{:hooks {:analyze-call {portfolio.react-18/defscene hooks.portfolio.react-18/defscene-hook}}
+ :lint-as {devcards.core/defcard clojure.core/def
+           devcards.core/defcard-rg clojure.core/def
+           portfolio.reagent/defscene clojure.core/defn}}

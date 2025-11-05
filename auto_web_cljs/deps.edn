@@ -1,4 +1,4 @@
-{:deps {devcards/devcards {:mvn/version "0.2.7"}
+{:deps {no.cjohansen/portfolio {:mvn/version "2025.10.1"}
         re-frame/re-frame {:mvn/version "1.4.3"}
         thheller/shadow-cljs {:mvn/version "3.2.0"}}
  :paths ["src" "env/devcards/src"]}

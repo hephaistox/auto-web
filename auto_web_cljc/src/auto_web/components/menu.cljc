@@ -1,6 +1,6 @@
 (ns auto-web.components.menu
   (:require
-   [auto-web.components.link :refer [clink]]))
+   [auto-web.components.link :refer [link-opts]]))
 
 (defn chorizontal-text-menu
   "A menu made of text elements only, organized horizontally."
@@ -8,8 +8,7 @@
   (let [opts* (if (coll? links) opts {})
         links* (if (coll? links) links opts)]
     (vec (concat [:div.w3-flex (assoc-in opts* [:style :justify-content] "center")]
-                 (map (fn [link]
-                        (clink {:class "w3-bar-item w3-button w3-mobile"} link (:text link)))
+                 (map (fn [link] [:a.w3-bar-item.w3-button.w3-mobile (link-opts link) (:text link)])
                       links*)))))
 
 (defn cvertical-text-menu
@@ -18,6 +17,5 @@
   (let [opts* (if (coll? links) opts {})
         links* (if (coll? links) links opts)]
     (vec (concat [:div.w3-bar-block opts*]
-                 (map (fn [link]
-                        (clink {:class "w3-bar-item w3-button w3-mobile"} link (:text link)))
+                 (map (fn [link] [:a.w3-bar-item.w3-button.w3-mobile (link-opts link) (:text link)])
                       links*)))))

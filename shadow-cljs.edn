@@ -1,26 +1,21 @@
-{:builds
- {:cljs-browser-test {:ns-regexp "-test$"
-                      :runner-ns shadow.test.browser
-                      :target :browser-test
-                      :test-dir "target/browser-test"}
-  :cljs-node-test {:autorun true
-                   :ns-regexp "-test$"
-                   :output-to "target/cljs-node-test.js"
-                   :target :node-test}
-  :devcards {:target :browser-test
-             :ns-regexp "-cards$"
-             :test-dir "target/devcards"
-             :runner-ns auto-web.devcards ; must have init fn to run
-             :devtools {:http-root "env/devcards/resources"
-                        :index-page "cards.html"}
-             :compiler-options {:devcards true
-                                :output-feature-set :es8}
-             :js-options {:resolve {"devcards-marked" {:require "marked"
-                                                       :target :npm}
-                                    "devcards-syntax-highlighter" {:require "highlight.js"
-                                                                   :target :npm}}}}}
+{:builds {:cljs-browser-test {:ns-regexp "-test$"
+                              :runner-ns shadow.test.browser
+                              :target :browser-test
+                              :test-dir "target/browser-test"}
+          :cljs-node-test {:autorun true
+                           :ns-regexp "-test$"
+                           :output-to "target/cljs-node-test.js"
+                           :target :node-test}
+          :portfolio {:asset-path "/"
+                      :modules {:main {:init-fn auto-web.portfolio/init}}
+                      :output-dir "target/portfolio"
+                      :target :browser}}
  :deps {:aliases [:cljs-deps]}
- :dev-http {3001 ["target/devcards" "resources/public" "env/devcards/resources"]
+ :dev-http {3002 ["public"
+                  "classpath:public"
+                  "auto_web_cljs/env/portfolio/resources"
+                  "target/portfolio"
+                  "auto_web_clj/resources/public/"]
             9606 ["target/browser-test"]}
  :http {:port 9506}
  :nrepl {:port 7106}}
