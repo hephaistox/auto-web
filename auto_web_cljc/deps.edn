@@ -1,6 +1,10 @@
-{:deps {com.github.hephaistox/auto-core {:git/sha "e72b9a127cd0d7a2665be1db69673babed722ee5"}
-        com.taoensso/sente {:mvn/version "1.20.0"}
-        hiccup/hiccup {:mvn/version "2.0.0"}
-        metosin/muuntaja {:mvn/version "0.6.11"}
-        metosin/reitit {:mvn/version "0.9.1"}}
+{:deps {com.github.hephaistox/auto-core
+          {:git/sha "e72b9a127cd0d7a2665be1db69673babed722ee5",
+           :git/url "https://github.com/hephaistox/auto-core",
+           :hephaistox/dir "../../auto_core",
+           :hephaistox/url "https://github.com/hephaistox/auto-core"},
+        com.taoensso/sente {:mvn/version "1.20.0"},
+        hiccup/hiccup {:mvn/version "2.0.0"},
+        metosin/muuntaja {:mvn/version "0.6.11"},
+        metosin/reitit {:mvn/version "0.9.1"}},
  :paths ["src"]}
