@@ -28,11 +28,12 @@
      (fn []
        (binding [*out* out
                  *err* err]
-         (println (format "Rate limiter cleanup thread: `%s-%s` (%d IPs): %s"
-                          name
-                          id
-                          (count @state)
-                          (str/join ", " (keys @state))))
+         (when (pos? (count @state))
+           (println (format "Rate limiter cleanup thread: `%s-%s` (%d IPs): %s"
+                            name
+                            id
+                            (count @state)
+                            (str/join ", " (keys @state)))))
          (let [now (Instant/now)]
            (swap! state (fn [m]
                           (->> m
