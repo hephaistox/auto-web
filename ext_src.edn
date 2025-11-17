@@ -2,5 +2,4 @@
                                            "LICENSE.md"
                                            "docs/img/automaton_duck.png"
                                            ".github/workflows/deploy_clojar.yml"
-                                           ".github/workflows/commit_validation.yml"]}
- com.github.hephaistox/auto-core {:files [".gitignore"]}}
+                                           ".github/workflows/commit_validation.yml"]}}
