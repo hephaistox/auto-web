@@ -54,6 +54,10 @@
     {:middleware-fn
      (fn [handler]
        (fn [req]
+         ;; Only a refusal is logged. An accepted request is the normal case, and a limiter early in
+         ;; every chain would otherwise print one line — and format one string — per request served:
+         ;; log volume proportional to traffic, and work on the hot path, to record that nothing
+         ;; happened. The refusal is the event; it stays.
          (let [{:keys [remote-addr]} req
                ip remote-addr
                now (Instant/now)
@@ -61,32 +65,31 @@
                 :or {count 0
                      start now}}
                (get @state ip)
-               elapsed (.toMillis (Duration/between start now))
-               header (format "Middleware `%s-%s`, request (ip %s) at time %s" name id ip now)]
+               elapsed (.toMillis (Duration/between start now))]
            (if (< elapsed window-ms)
              (if (< count limit)
-               (do (println (format "%s, request accepted in window [%s, +%d], [%d < %d]"
-                                    header
-                                    start
-                                    window-ms
-                                    count
-                                    limit))
-                   (swap! state update
+               (do (swap! state update
                      ip
                      #(-> %
                           (update :count (fnil inc 0))
                           (assoc :start start)))
                    (handler req))
-               (do (println (format "%s, request refused in window [%s, +%d], [%d >= %d]"
-                                    header
-                                    start
-                                    window-ms
-                                    count
-                                    limit))
-                   (-> (response/response "Too many requests")
-                       (response/status 429))))
-             (do (println (format "%s, is beyond window [%s, +%d]" header start window-ms))
-                 (swap! state assoc
+               (do
+                 (println
+                  (format
+                   "Middleware `%s-%s`, request (ip %s) at time %s, request refused in window [%s, +%d], [%d >= %d]"
+                   name
+                   id
+                   ip
+                   now
+                   start
+                   window-ms
+                   count
+                   limit))
+                 (flush)
+                 (-> (response/response "Too many requests")
+                     (response/status 429))))
+             (do (swap! state assoc
                    ip
                    {:count 1
                     :start now})
